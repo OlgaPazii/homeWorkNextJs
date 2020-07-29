@@ -1,3 +1,3 @@
 export default function SecondPost() {
-  return <h1>Second Page!!!</h1>
+  return <h1>Second Page!!! Hi here!</h1>
 }
