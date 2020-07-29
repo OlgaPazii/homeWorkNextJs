@@ -15,7 +15,9 @@ export default function Home() {
           Welcome to <a href="/todo/static-page">Next.js!</a>
           {num}
         </h1>
+
       </main>
     </div>
+    
   )
 }
