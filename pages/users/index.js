@@ -20,12 +20,9 @@ export default function Users({users}) {
       <Button variant="contained" color="secondary">
         <Link href="/">Return to the homepage</Link>
       </Button>
-      <Button 
-     // onClick={users} 
-      variant="contained" color="primary">
+      <Button onClick={users} variant="contained" color="primary">
         Download user data
       </Button>
-      {users}
       <main>
         {
           props.users.map(user => {
