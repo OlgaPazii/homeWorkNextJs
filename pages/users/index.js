@@ -6,28 +6,29 @@ import Button from "@material-ui/core/Button";
 // import CardContent from "@material-ui/core/CardContent";
 // import Typography from "@material-ui/core/Typography";
 
-export default function Users({users}) {
-  // const [data, setData] = useState([]);
+export async function getServerSideProps() {
+  const response = await fetch("http://www.json-generator.com/api/json/get/cgcEEPXOJK?indent=2")
+  const users = await response.json()
 
-  // const getData = () => {
-  //   const url =
-  //     "http://www.json-generator.com/api/json/get/cgcEEPXOJK?indent=2";
-  //   fetch(url)
-  //     .then((res) => res.json())
-  //     .then((data) => setData(data));
-  // };
+  return { props: {users}}
+}
+
+export default function Users({users}) {
 
   return (
     <div>
       <Button variant="contained" color="secondary">
         <Link href="/">Return to the homepage</Link>
       </Button>
-      <Button onClick={users} variant="contained" color="primary">
+      <Button 
+     // onClick={users} 
+      variant="contained" color="primary">
         Download user data
       </Button>
+      {users}
       <main>
         {
-          users.map(user => {
+          props.users.map(user => {
             return(
               <div key={user._id}>
                 <p>{user.name} has {user.eyeColor}</p>
@@ -36,27 +37,8 @@ export default function Users({users}) {
           })
         }
       </main>
-      {/* {data.map((data) => (
-        <Card key={data._id}>
-          <CardActionArea>
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="h2">
-                Name: {data.name}
-              </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                Color eye: {data.eyeColor}
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card>
-      ))} */}
     </div>
   );
 }
 
-export async function getServerSideProps(props) {
-  const response = await fetch("http://www.json-generator.com/api/json/get/cgcEEPXOJK?indent=2")
-  const users = await response.json()
 
-  return { props: {users}}
-}
