@@ -1,32 +1,42 @@
 import Link from 'next/link';
 import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
+// import Card from "@material-ui/core/Card";
+// import CardActionArea from "@material-ui/core/CardActionArea";
+// import CardContent from "@material-ui/core/CardContent";
+// import Typography from "@material-ui/core/Typography";
 
-export default function index() {
-  const [data, setData] = useState([]);
+export default function Users({users}) {
+  // const [data, setData] = useState([]);
 
-  const getData = () => {
-    const url =
-      "http://www.json-generator.com/api/json/get/cgcEEPXOJK?indent=2";
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => setData(data));
-  };
+  // const getData = () => {
+  //   const url =
+  //     "http://www.json-generator.com/api/json/get/cgcEEPXOJK?indent=2";
+  //   fetch(url)
+  //     .then((res) => res.json())
+  //     .then((data) => setData(data));
+  // };
 
-  console.log(data);
   return (
     <div>
       <Button variant="contained" color="secondary">
-        <Link href="/"> Вернуться на главную</Link>
+        <Link href="/">Return to the homepage</Link>
       </Button>
       <Button onClick={getData} variant="contained" color="primary">
-        Загрузить данные пользователей
+        Download user data
       </Button>
-      {data.map((data) => (
+      <main>
+        {
+          users.map(user => {
+            return(
+              <div key={user._id}>
+                <p>{user.name} has {user.eyeColor}</p>
+              </div>
+            )
+          })
+        }
+      </main>
+      {/* {data.map((data) => (
         <Card key={data._id}>
           <CardActionArea>
             <CardContent>
@@ -39,8 +49,14 @@ export default function index() {
             </CardContent>
           </CardActionArea>
         </Card>
-      ))}
+      ))} */}
     </div>
   );
 }
 
+export async function getServerSideProps() {
+  const response = await fetch("http://www.json-generator.com/api/json/get/cgcEEPXOJK?indent=2")
+  const users = await response.json()
+
+  return { props: {users}}
+}
