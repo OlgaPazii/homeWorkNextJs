@@ -54,7 +54,7 @@ export default function Users({users}) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(props) {
   const response = await fetch("http://www.json-generator.com/api/json/get/cgcEEPXOJK?indent=2")
   const users = await response.json()
 
