@@ -12,7 +12,7 @@ export async function getServerSideProps() {
   }
 }
 
-export default function SecondPost() {
+export default function SecondPost(props) {
   return (
     <div>
       <h1>Second Page!!! Hi there!!!!!!!!!</h1>
